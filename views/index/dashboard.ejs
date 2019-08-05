@@ -1,13 +1,12 @@
 <% include ../partials/header %>
 <div class="container">
-	
 	<h4>
 		Your Stories
-		<span class="float-right"
-			> <a href="/stories/add">ADD A STORY <i class="fas fa-plus-circle" style="font-size: 2rem"></i> </a
+		<span class="float-right">
+			<a href="/stories/add">ADD A STORY <i class="fas fa-plus-circle" style="font-size: 2rem"></i> </a
 		></span>
 	</h4>
-   <% if(stories.length){%>
+	<% if(stories.length){%>
 	<table class="table table-light table-striped">
 		<thead class="thead-dark">
 			<tr>
@@ -15,17 +14,13 @@
 				<th scope="col">Title</th>
 				<th scope="col">Date</th>
 				<th scope="col">Status</th>
-				<th scope="col"></th>
-				<th scope="col"></th>
+				<th scope="col">Edit</th>
+				<th scope="col">Delete</th>
 			</tr>
 		</thead>
 
-  <% }%>
-	
-
-		
-			<% stories.forEach((story,index)=>{ %>
-			<tbody>	
+		<% }%> <% stories.forEach((story,index)=>{ %>
+		<tbody>
 			<tr>
 				<th scope="row"><%=(index+1)%></th>
 				<td><a href="/stories/show/<%=story._id%>"><%= story.title %></a></td>
@@ -43,9 +38,8 @@
 					</form>
 				</td>
 			</tr>
-			</tbody>
-			<% })%>
-		
+		</tbody>
+		<% })%>
 	</table>
 </div>
 
