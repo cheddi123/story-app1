@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+
+<div class="container">
+<h1>Welcome to story telling</h1>
+<p>Post stories of your experiences in life and choose to be read publicly or you can keep it private</p>
+
+<% if(!user){%>
+    <a href="/user/login" class="btn btn-large btn-primary">Login</a>
+<%}%>
+
+</div>
+
+
+<% include ../partials/footer %>

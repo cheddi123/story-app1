@@ -1,0 +1,79 @@
+<% include ../partials/header %>
+<div class="container">
+    
+	<div>
+		<h1>Register</h1>
+
+		<form action="/user/register" method="POST"  >
+			
+			<div class="form-group" >
+				<label for="firstname">FirstName</label>
+				<input
+					type="text"
+					class="form-control"
+					id="firstname"
+					name="firstname"
+					placeholder="Enter your FirstName"
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="lastname">LastName</label>
+				<input
+					type="text"
+					class="form-control"
+					id="lastname"
+					name="lastname"
+					placeholder="Enter your LastName"
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input
+					type="text"
+					class="form-control"
+					id="email"
+					name="email"
+					placeholder="Enter Your Email"
+					required
+				/>
+			</div>
+			<div class="form-group">
+				<label for="username">UserName</label>
+				<input
+					type="text"
+					class="form-control"
+					id="username"
+					name="username"
+					placeholder="Username at least 5 alphanum char"
+					required
+					onkeyup="this.value = this.value.toLowerCase()"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input
+					type="password"
+					class="form-control"
+					id="password"
+					name="password"
+					placeholder="password at least 5 chars"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="password2">Confirm</label>
+				<input
+					type="password"
+					class="form-control"
+					id="password2"
+					name="password2"
+					placeholder="Confirm Password"
+				/>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+	<% include ../partials/footer %>
+</div>

@@ -1,0 +1,42 @@
+<% include ../partials/header %>
+<div class="container">
+        <h1>Welcome <%= user.firstname %></h1>
+        <h4>Edit Your Story</h4>
+        <form action="/stories/<%=story._id %>?_method=PUT" method="POST">
+            <div class="form-group">
+                <label for="title"> Title</label>
+                <input class="form-control" type="text" name="title" id="title" value="<%=story.title%>" />
+            </div>
+            <div class="form-group">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="form-control" required>
+                    <option value="" selected disabled hidden>Choose here</option>
+                    <option value="public"  >Public</option>
+                    <option value="private">Private</option>
+                    <option value="unpublished">Unpublished</option>
+                </select>
+            </div>
+            <div class="form-group">
+                    <p >
+                        <label for="allowComments"> Allow Comments</label>
+                        <input type="checkbox" name="allowComments" id="allowComments" <% if(story.allowComments){ %> checked <%} %> >
+                    </p>
+                </div>
+                <div class="form-group">
+                       <h5>Tell Us Your Story</h5>
+                        <textarea class="form-control" name="storybody" id="storybody" cols="30" rows="10"><%= story.storybody %> </textarea>
+                    </div>
+                    <input type="submit" class="btn btn-info" value="Save">
+        </form>
+</div>
+
+<!--CS Editor Script-->
+<script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js">
+        
+</script>
+<script >
+ CKEDITOR.replace('storybody',{
+     plugins:"wysiwygarea,toolbar,basicstyles,link"
+ });
+</script>
+<% include ../partials/footer %>

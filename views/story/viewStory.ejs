@@ -1,0 +1,35 @@
+<% include ../partials/header %>
+
+<div class="jumbotron " id="jumbo">
+	<div class="primary">
+		<h1 class="text-center">Read Stories of all kind</h1>
+	</div>
+</div>
+<div class="row mx-3  ">
+	<% if(stories){%> <% stories.forEach(story=>{%>
+	<div class="col-md-3  my-2 ">
+		<div class="card homepage" style="width: 100%">
+			<div class="card-body">
+				<h5 class="card-title">Title: <%= story.title %></h5>
+				<div class="text restrict">
+					<span class="card-text "> <%- story.storybody %> </span>
+				</div>
+
+				<a href="/stories/show/<%=story.id%>" class="btn btn-secondary showmore ">Read More</a>
+
+				<footer class="blockquote-footer">
+					Written by:
+					<cite title="Source Title"
+						><%= story.user.firstname %> on
+						<span class="font-weight-bold"><%= moment(story.storyDate).format("ll") %></span>
+					</cite>
+				</footer>
+			</div>
+		</div>
+	</div>
+	<% }) %> <% }else{ %>
+	<h2>No Stories found</h2>
+	<%}%>
+</div>
+
+<% include ../partials/footer %>

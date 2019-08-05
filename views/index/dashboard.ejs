@@ -1,0 +1,47 @@
+<% include ../partials/header %>
+<div class="container">
+	
+	<h4>
+		Your Stories
+		<span class="float-right"
+			> <a href="/stories/add">ADD MORE STORIES <i class="fas fa-plus-circle" style="font-size: 2rem"></i> </a
+		></span>
+	</h4>
+
+	<table class="table table-light table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Title</th>
+				<th scope="col">Date</th>
+				<th scope="col">Status</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% stories.forEach((story,index)=>{ %>
+			<tr>
+				<th scope="row"><%=(index+1)%></th>
+				<td><a href="/stories/show/<%=story._id%>"><%= story.title %></a></td>
+				<td><%= moment(story.storyDate).format("LLL") %></td>
+				<td><span class="text-capitalize"><%= story.status %></span></td>
+				<td>
+					<a class="btn btn-info btn-sm" href="/stories/edit/<%= story._id %>"
+						>Edit <i class="far fa-edit"></i
+					></a>
+				</td>
+
+				<td>
+					<form action="/stories/<%=story._id %>?_method=DELETE" method="POST">
+						<button class="btn btn-danger btn-sm">Delete <i class="far fa-trash-alt"></i></button>
+					</form>
+				</td>
+			</tr>
+			<% })%>
+		</tbody>
+	</table>
+</div>
+
+<% include ../partials/footer %>
