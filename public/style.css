@@ -43,3 +43,15 @@ background-image: linear-gradient(rgb(83, 145, 216),rgb(218, 218, 105))
     left: 0;
     width: 100%;
     height: 100%; }
+
+	#maintext{
+		font-family: 'Luckiest Guy', cursive;
+		color: rgb(57, 68, 80)
+	}
+
+	.navbar-dark .navbar-nav .nav-link {
+		color: #fff;
+	}
+	h1{
+		font-family: 'Permanent Marker', cursive;
+	}

@@ -43,10 +43,12 @@ router.post(
 	],
 
 	(req, res) => {
+	   
+		
         const firstname = req.body.firstname;
         const lastname = req.body.lastname;
 		const email = req.body.email;
-		const username = req.body.username;
+		const username = req.body.username.toLowerCase();
 		const password = req.body.password;
 		// const password2 = req.body.password2;
 
@@ -75,7 +77,7 @@ router.post(
 					newUser.password = hash;
 					newUser.save(err => {
 						if (err) {
-						
+							
 							req.flash('danger', err.message);
 							res.render('user/register');
 							return;

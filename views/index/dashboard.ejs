@@ -4,10 +4,10 @@
 	<h4>
 		Your Stories
 		<span class="float-right"
-			> <a href="/stories/add">ADD MORE STORIES <i class="fas fa-plus-circle" style="font-size: 2rem"></i> </a
+			> <a href="/stories/add">ADD A STORY <i class="fas fa-plus-circle" style="font-size: 2rem"></i> </a
 		></span>
 	</h4>
-
+   <% if(stories.length){%>
 	<table class="table table-light table-striped">
 		<thead class="thead-dark">
 			<tr>
@@ -20,8 +20,12 @@
 			</tr>
 		</thead>
 
-		<tbody>
+  <% }%>
+	
+
+		
 			<% stories.forEach((story,index)=>{ %>
+			<tbody>	
 			<tr>
 				<th scope="row"><%=(index+1)%></th>
 				<td><a href="/stories/show/<%=story._id%>"><%= story.title %></a></td>
@@ -39,8 +43,9 @@
 					</form>
 				</td>
 			</tr>
+			</tbody>
 			<% })%>
-		</tbody>
+		
 	</table>
 </div>
 
