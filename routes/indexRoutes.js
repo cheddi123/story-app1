@@ -6,7 +6,12 @@ const Story = mongoose.model("story")
 
 // GET HOMEPAGE
 router.get("/",(req,res)=>{
-    res.redirect("/stories")
+    Story.find({ status: 'public' })
+	     .sort({ storyDate: -1 })
+		 .populate('user')
+		.then(stories => {
+			res.render('story/viewStory', { stories });
+		});
 })
 
 //GET Dashboard
