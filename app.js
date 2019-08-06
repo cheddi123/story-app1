@@ -46,8 +46,7 @@ app.use(flash());
 require("./config/passportGoogle")(passport)
 
 // Passport Config Put this before routes
-// require('./config/passport')(passport);
-
+require('./config/passport')(passport);
 
 //Passport Middleware. Put this before routes
 app.use(passport.initialize());
