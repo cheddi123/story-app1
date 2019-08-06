@@ -70,7 +70,7 @@ app.use("/",indexRoutes)
 app.use("/auth",authRoutes)
 
 mongoose.set('useCreateIndex', true);
-const url = process.env.DATABASE   || 'mongodb://localhost/Storytell_Db';
+const url = process.env.MONGO_URL || 'mongodb://localhost/Storytell_Db';
 
 // const url ='mongodb://localhost/Article_Db';
 mongoose.connect(url, { useNewUrlParser: true }, err => {
