@@ -42,11 +42,12 @@ app.use(
 app.use(flash());
 
 
+
 // Passport Config
 require("./config/passportGoogle")(passport)
 
 // Passport Config Put this before routes
-require('./config/passport')(passport);
+// require('./config/passport')(passport);
 
 //Passport Middleware. Put this before routes
 app.use(passport.initialize());
@@ -81,3 +82,4 @@ mongoose.connect(url, { useNewUrlParser: true }, err => {
 app.listen(PORT, (req, res) => {
 	console.log(`Server is listening on ${PORT}`);
 });
+

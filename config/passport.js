@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/UserModel');
+const LocalUserModel = require('../models/LocalUserModel');
 const bcrypt = require('bcryptjs');
 
 module.exports = function(passport) {
@@ -7,9 +7,9 @@ module.exports = function(passport) {
 	passport.use(
 		new LocalStrategy(function(username, password, done) {
 			// Match UserName
-			User.findOne({ username: username.toLowerCase() }, function(err, user) {
+			LocalUserModel.findOne({ username: username.toLowerCase() }, function(err, localuser) {
                 if (err) { return done(err); }
-				if (!user) {
+				if (!localuser) {
 					
 					return done(null, false, { message: 'No user found' });
 				}
@@ -17,11 +17,11 @@ module.exports = function(passport) {
 				// if (!user.verifyPassword(password)) { return done(null, false); }
 				// return done(null, user);
 
-				bcrypt.compare(password, user.password, (err, isMatched) => {
+				bcrypt.compare(password, localuser.password, (err, isMatched) => {
 					if (err) throw err;
 					if (isMatched) {
-						console.log(user)
-						return done(null, user);
+						console.log(localuser)
+						return done(null, localuser);
 					} else {
 						return done(null, false, { message: 'wrong password' });
 					}
@@ -34,8 +34,8 @@ module.exports = function(passport) {
 	});
 
 	passport.deserializeUser(function(id, done) {
-		User.findById(id, function(err, user) {
-			done(err, user);
+		LocalUserModel.findById(id, function(err, user) {
+			done(null, user);
 		});
 	});
 };

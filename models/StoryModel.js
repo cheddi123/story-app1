@@ -15,10 +15,11 @@ const StorySchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'user',
 	},
-
+	
 	storyDate: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model('story', StorySchema,"stories");
+
 
 

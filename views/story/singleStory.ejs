@@ -45,8 +45,8 @@
 						<div class="card-body table-dark">
 							<p><%= comment.commentBody %></p>
 							<div class="blockquote-footer text-white">
-								<span class="font-weight-bold">Post by <%=comment.username%> </span>
-								<cite> On <%= moment(comment.commentDate).format("lll") %> </cite>
+								<span class="font-weight-bold">Post by <%=user.local.firstname || user.google.firstname %> </span>
+								<cite> On <%= moment(comment.createdAt).format("lll") %> </cite>
 							</div>
 
 							<form
@@ -72,7 +72,7 @@
 		<div class="col-md-3">
 			<div class="card">
 				<div class="card-body">
-					<h3 class="card-title"><%= story.user.firstname %> <%= story.user.lastname %></h3>
+					<h3 class="card-title"><%= story.user.local.firstname || story.user.google.firstname  %> <%= story.user.local.lastname || story.user.google.lastname  %></h3>
 					<h5 class="card-link"><a href="/stories/user/<%= story.user.id%>"> More Stories>></a></h5>
 				</div>
 			</div>

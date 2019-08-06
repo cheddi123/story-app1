@@ -53,11 +53,10 @@
 			<a class="navbar-brand" href="/">StoryTelling Home </a>
 			<% if(user){ %>
 			<a class="navbar-brand font-weight-bold" href="#"
-				>Welcome <span class="text-capitalize"><%= user.firstname %></span>
+				>Welcome <span class="text-capitalize"><%= (user.local.firstname) || (user.google.firstname)  %></span>
 			</a>
-
-			<%}%>
-
+		<%}%>
+			
 			<button
 				class="navbar-toggler"
 				type="button"
@@ -71,13 +70,18 @@
 			</button>
 			<div class="collapse navbar-collapse " id="navbarNav">
 				<ul class="navbar-nav  ml-auto ">
-					<% if(!user){%>
+					<% if(!user ){%>
 
 					<li class="nav-item ">
 						<a class="nav-link color " href="/auth/google"
 							>Login <i class="fas fa-user-circle" style="font-size: 18px"></i
 						></a>
 					</li>
+					<li class="nav-item ">
+							<a class="nav-link color " href="/user/login"
+								>LocalLogin <i class="fas fa-user-circle" style="font-size: 18px"></i
+							></a>
+						</li>
 					<li class="nav-item ">
 						<a class="nav-link" href="/user/register">Register</a>
 					</li>

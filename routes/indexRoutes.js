@@ -8,7 +8,8 @@ const Story = mongoose.model("story")
 router.get("/",(req,res)=>{
     Story.find({ status: 'public' })
 	     .sort({ storyDate: -1 })
-		 .populate('user')
+         .populate('user')
+         .populate("localUser")
 		.then(stories => {
 			res.render('story/viewStory', { stories });
 		});
