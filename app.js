@@ -11,7 +11,7 @@ const storyRoutes = require("./routes/storyRoutes")
 const indexRoutes = require("./routes/indexRoutes")
 const methodOverride = require('method-override')
 const authRoutes = require("./routes/auth")
-
+const keys = require('./config/keys');
 
 // HELPERS
 const {stripTags} = require("./helpers/ejshelper")
@@ -70,7 +70,7 @@ app.use("/",indexRoutes)
 app.use("/auth",authRoutes)
 
 mongoose.set('useCreateIndex', true);
-const url = process.env.MONGO_URL || 'mongodb://localhost/Storytell_Db';
+const url = keys.mongoURL || 'mongodb://localhost/Storytell_Db';
 
 // const url ='mongodb://localhost/Article_Db';
 mongoose.connect(url, { useNewUrlParser: true }, err => {
