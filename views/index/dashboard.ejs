@@ -7,9 +7,9 @@
 		></span>
 	</h4>
 	<% if(stories.length){%>
-	<table class="table table-light table-striped table-responsive-sm">
+	<table class="table table-light table-striped table-responsive-sm ">
 		<thead class="thead-dark">
-			<tr>
+			<tr  >
 				<th scope="col">#</th>
 				<th scope="col">Title</th>
 				<th scope="col">Date</th>
@@ -21,7 +21,7 @@
 
 		<% }%> <% stories.forEach((story,index)=>{ %>
 		<tbody>
-			<tr>
+			<tr >
 				<th scope="row"><%=(index+1)%></th>
 				<td><a href="/stories/show/<%=story._id%>"><%= story.title %></a></td>
 				<td><%= moment(story.storyDate).format("LLL") %></td>

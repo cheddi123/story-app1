@@ -10,6 +10,8 @@ const userRoutes = require("./routes/userRoutes")
 const storyRoutes = require("./routes/storyRoutes")
 const indexRoutes = require("./routes/indexRoutes")
 const methodOverride = require('method-override')
+const authRoutes = require("./routes/auth")
+
 
 // HELPERS
 const {stripTags} = require("./helpers/ejshelper")
@@ -39,8 +41,14 @@ app.use(
 // EXPRESS MESSAGES MIDDLEWARE
 app.use(flash());
 
+
+// Passport Config
+require("./config/passportGoogle")(passport)
+
 // Passport Config Put this before routes
 require('./config/passport')(passport);
+
+
 //Passport Middleware. Put this before routes
 app.use(passport.initialize());
 app.use(passport.session());
@@ -60,6 +68,7 @@ app.use(function(req, res, next) {
 app.use("/user",userRoutes)
 app.use("/stories",storyRoutes)
 app.use("/",indexRoutes)
+app.use("/auth",authRoutes)
 
 mongoose.set('useCreateIndex', true);
 const url = process.env.DATABASE   || 'mongodb://localhost/Storytell_Db';
