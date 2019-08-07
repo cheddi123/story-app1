@@ -25,13 +25,38 @@
 					<% } %>
 				</div>
 			</div>
+
 			<% if(story.allowComments){ %>
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">
-						Comments
-					</h4>
-					<% if(user){ %>
+					<h4 class="card-title">Comments <i class="far fa-comment" style="font-size: 2rem"></i></h4>
+
+					<% story.comments.forEach(comment =>{ %>
+					<div class="card table ">
+						<div class="card-body table-dark">
+							<div class="blockquote-footer text-white py-2">
+								<span class="font-weight-bold">Post by <%=comment.username %> </span>
+								<cite> On <%= moment(comment.createdAt).format("lll") %> </cite>
+
+								<%if(user){%> <% if(comment.id.equals(user.id)){%>
+								<form
+									action="/stories/<%= story._id %>/comment/<%=comment._id %>?_method=DELETE"
+									method="POST"
+								>
+									<button
+										type="submit"
+										class="card-link btn btn-sm btn-danger float-right rounded-circle  "
+									>
+									<i class="far fa-trash-alt" style="font-size: 1.5rem"></i>
+									</button>
+								</form>
+								<% }%> <% }%>
+							</div>
+
+							<p class="lead"><%= comment.commentBody %></p>
+						</div>
+					</div>
+					<% }) %> <% if(user){ %>
 					<div>
 						<form action="/stories/comment/<%=story._id %>" method="POST" class="form-group">
 							<label for="comments">Add a comment</label>
@@ -40,33 +65,9 @@
 							<input class="btn btn-success my-2" type="submit" />
 						</form>
 					</div>
-					<% story.comments.forEach(comment =>{ %>
-					<div class="card table ">
-						<div class="card-body table-dark">
-							<div class="blockquote-footer text-white py-2">
-								<span class="font-weight-bold">Post by <%=comment.username %> </span>
-								<cite> On <%= moment(comment.createdAt).format("lll") %> </cite>
-								<form
-									action="/stories/<%= story._id %>/comment/<%=comment._id %>?_method=DELETE"
-									method="POST"
-								>
-									<% if(comment.id.equals(user.id)){%>
-									<button
-										type="submit"
-										class="card-link btn btn-sm btn-danger float-right rounded-circle  "
-									>
-										<i class="fas fa-times"></i>
-									</button>
 
-									<% }%>
-								</form>
-							</div>
-
-							<p class="lead"><%= comment.commentBody %></p>
-						</div>
-					</div>
-					<% }) %> <%}else{%>
-					<p id="main-nav">Please  <a href="#login" > Login </a> to leave a comment</p>
+					<%}else{%>
+					<h3 id="main-nav">Please <a href="#login"> Login </a> to leave a comment</h3>
 					<% }%>
 				</div>
 			</div>
