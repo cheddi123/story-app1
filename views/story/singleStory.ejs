@@ -11,7 +11,7 @@
 					</cite>
 					<p class="card-text"><%- story.storybody %></p>
 
-					<% if(story.user.id === user.id) { %>
+					<% if(user && (story.user.id === user.id)) { %>
 					<div class="float-right">
 						<a href="/stories/edit/<%=story._id %>" class="card-link btn btn-sm btn-info "
 							>Edit <i class="far fa-edit"></i
@@ -35,7 +35,7 @@
 					<div>
 						<form action="/stories/comment/<%=story._id %>" method="POST" class="form-group">
 							<label for="comments">Add a comment</label>
-							<textarea name="commentBody" id="comments" class="form-control bg-light" required>
+							<textarea name="commentBody" id="comments" class="form-control bg-light" rows="3" required>
 							</textarea>
 							<input class="btn btn-success my-2" type="submit" />
 						</form>
@@ -43,27 +43,30 @@
 					<% story.comments.forEach(comment =>{ %>
 					<div class="card table ">
 						<div class="card-body table-dark">
-							<p><%= comment.commentBody %></p>
-							<div class="blockquote-footer text-white">
-								<span class="font-weight-bold">Post by <%=user.local.firstname || user.google.firstname %> </span>
+							<div class="blockquote-footer text-white py-2">
+								<span class="font-weight-bold">Post by <%=comment.username %> </span>
 								<cite> On <%= moment(comment.createdAt).format("lll") %> </cite>
+								<form
+									action="/stories/<%= story._id %>/comment/<%=comment._id %>?_method=DELETE"
+									method="POST"
+								>
+									<% if(comment.id.equals(user.id)){%>
+									<button
+										type="submit"
+										class="card-link btn btn-sm btn-danger float-right rounded-circle  "
+									>
+										<i class="fas fa-times"></i>
+									</button>
+
+									<% }%>
+								</form>
 							</div>
 
-							<form
-								action="/stories/<%= story._id %>/comment/<%=comment._id %>?_method=DELETE"
-								method="POST"
-							>
-								<% if(comment.id.equals(user.id)){%>
-								<button type="submit" class="card-link btn btn-sm btn-danger float-right rounded-circle  ">
-									 <i class="fas fa-times"></i>
-								</button>
-
-								<% }%>
-							</form>
+							<p class="lead"><%= comment.commentBody %></p>
 						</div>
 					</div>
 					<% }) %> <%}else{%>
-					<p>Please <a href="/user/login"> Login </a> to leave a comment</p>
+					<p>Please <a href="#login"> Login </a> to leave a comment</p>
 					<% }%>
 				</div>
 			</div>
@@ -72,8 +75,12 @@
 		<div class="col-md-3">
 			<div class="card">
 				<div class="card-body">
-					<h3 class="card-title"><%= story.user.local.firstname || story.user.google.firstname  %> <%= story.user.local.lastname || story.user.google.lastname  %></h3>
-					<h5 class="card-link"><a href="/stories/user/<%= story.user.id%>"> More Stories>></a></h5>
+					<h5 class="card-link">
+						<a href="/stories/user/<%= story.user.id%>">
+							More Stories from <%= story.user.local.firstname || story.user.google.firstname %> <%=
+							story.user.local.lastname || story.user.google.lastname %> >></a
+						>
+					</h5>
 				</div>
 			</div>
 		</div>

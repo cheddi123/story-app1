@@ -16,10 +16,9 @@ router.get('/', (req, res) => {
 
 //Show A Single Story
 
-router.get('/show/:id',ensureAuthenticated, (req, res) => {
+router.get('/show/:id', (req, res) => {
 	Story.findById(req.params.id)
 		.populate('user')
-		.populate("localUser")
 		.populate('comments')
 		.then(story => {
 			res.render('story/singleStory', { story });
@@ -104,7 +103,7 @@ router.post('/comment/:id',ensureAuthenticated, (req, res) => {
 		} else {
 			Comment.create(req.body, (err, newComment) => {
 				newComment.id = req.user.id;
-				newComment.username = req.user.firstname;
+				newComment.username = req.user.google.firstname || req.user.local.firstname;
 
 				// save the comment
 				newComment.save();
@@ -137,10 +136,9 @@ router.post('/', ensureAuthenticated, (req, res) => {
 });
 
 // List Story from a User
-router.get('/user/:user_id',ensureAuthenticated, (req, res) => {
+router.get('/user/:user_id', (req, res) => {
 	Story.find({ user: req.params.user_id, status: 'public' })
 		.populate('user')
-		.populate("localUser")
 		.then(stories => {
 			res.render('story/viewStory', { stories });
 		})

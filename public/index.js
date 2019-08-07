@@ -1,21 +1,27 @@
-// $(document).ready(function(){
+// $(document).ready(function() {
+// 	//Init ScrollSpy
+// 	$('body').scrollspy({ target: '#login' });
 
-// $("body").on("click",".showmore",function(event){
-//     event.preventDefault() 
-//     let readtoggle = $(this).closest(".card-body").find(".text")
-//     // readtoggle.toggleClass("restrict")
-//     // $(this).html("Read Less")
-//     if($(this).text()==="Read More"){
-//           $(this).html("Read Less")
-//           readtoggle.toggleClass("restrict")
-//     }else{
-//         $(this).html("Read More")
-        
-//         readtoggle.toggleClass("restrict")
-//     }
-// })
-   
+// 	//Add smooth scrolling
+// 	$('#login ').on('click', function(e) {
+// 		// check for hash value
+// 		if (this.hash !== '') {
+// 			// Prevent Default behaviour
+// 			e.preventDefault();
+// 			// Store hash
+// 			const hash = this.hash;
 
-
-
-// })
+// 			// Animate smooth scroll
+// 			$('html,body').animate(
+// 				{
+// 					scrollTop: $(hash).offset().top,
+// 				},
+// 				2000,
+// 				function() {
+// 					// Add hash to URL after scroll
+// 					window.location.hash = hash;
+// 				}
+// 			);
+// 		}
+// 	});
+// });

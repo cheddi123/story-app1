@@ -27,7 +27,10 @@
 			crossorigin="anonymous"
 		/>
 		<!--LInk to Google FONTS-->
-		<link href="https://fonts.googleapis.com/css?family=Fredoka+One|Kaushan+Script|Luckiest+Guy|Neuton|Permanent+Marker|Rock+Salt&display=swap" rel="stylesheet">
+		<link
+			href="https://fonts.googleapis.com/css?family=Fredoka+One|Kaushan+Script|Luckiest+Guy|Neuton|Permanent+Marker|Rock+Salt&display=swap"
+			rel="stylesheet"
+		/>
 		<link rel="stylesheet" href="/style.css" type="text/css" />
 
 		<script
@@ -48,15 +51,15 @@
 
 		<title>Story Telling</title>
 	</head>
-	<body>
+	<body data-spy="scroll" data-target="#login">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-			<a class="navbar-brand" href="/">StoryTelling Home </a>
+			<a class="navbar-brand " href="/">StoryTelling Home </a>
 			<% if(user){ %>
 			<a class="navbar-brand font-weight-bold" href="#"
-				>Welcome <span class="text-capitalize"><%= (user.local.firstname) || (user.google.firstname)  %></span>
+				>Welcome <span class="text-capitalize"><%= (user.local.firstname) || (user.google.firstname) %></span>
 			</a>
-		<%}%>
-			
+			<%}%>
+
 			<button
 				class="navbar-toggler"
 				type="button"
@@ -72,27 +75,40 @@
 				<ul class="navbar-nav  ml-auto ">
 					<% if(!user ){%>
 
-					<li class="nav-item ">
-						<a class="nav-link color " href="/auth/google"
-							>Login <i class="fas fa-user-circle" style="font-size: 18px"></i
-						></a>
+					<li class="nav-item dropdown" id="login">
+						<a
+							class="nav-link dropdown-toggle"
+							href="#"
+							id="navbarDropdown"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
+						>
+							Login <i class="fas fa-user-circle" style="font-size: 18px"></i>
+						</a>
+						<div class="dropdown-menu " aria-labelledby="navbarDropdown">
+							<a class="dropdown-item  " href="/auth/google">Google <i class="fab fa-google"></i></a>
+							<!-- <a class="dropdown-item " data-toggle="modal" data-target="#loginModal"  href="/user/login">LocalLogin <i class="far fa-user"></i></a> -->
+							<button class="btn dropdown-item  " id="button" data-toggle="modal" data-target="#loginModal">
+								LocalLogin
+							</button>
+						</div>
 					</li>
+
 					<li class="nav-item ">
-							<a class="nav-link color " href="/user/login"
-								>LocalLogin <i class="fas fa-user-circle" style="font-size: 18px"></i
-							></a>
-						</li>
-					<li class="nav-item ">
-						<a class="nav-link" href="/user/register">Register</a>
+						<a class="nav-link" href="/user/register">Register <i class="fas fa-user-plus"></i></a>
 					</li>
 
 					<% } else{ %>
 
-					<li class="nav-item ">
-						<a href="/stories" class="navbar-brand "> Public Stories <i class="fas fa-book-reader"></i> </a>
+					<li class="nav-item  ">
+						<a href="/stories" class="navbar-brand   ">
+							Public Stories <i class="fas fa-book-reader"></i>
+						</a>
 					</li>
 					<li class="nav-item ">
-						<a href="/stories/add" class="navbar-brand ">
+						<a href="/stories/add" class="navbar-brand  ">
 							Add A Story <i class="fas fa-plus-circle"></i>
 						</a>
 					</li>
@@ -100,18 +116,47 @@
 						<a href="/dashboard" class="navbar-brand "> All My Stories <i class="fas fa-book"></i> </a>
 					</li>
 					<li class="nav-item ">
-						<a class="navbar-brand " href="/user/logout">LogOut</a>
+						<a class="navbar-brand  " href="/user/logout">LogOut</a>
 					</li>
 
 					<%}%>
 				</ul>
 			</div>
 		</nav>
-		      <div class="container my-2">
-				<%- messages('message', locals) %> <%if(errors){%> <% errors.forEach(error=>{%>
-				<div class="alert alert-danger"><%= error.msg%></div>
-				<%})%> <%}%>
+		<div class="container my-2">
+			<%- messages('message', locals) %> <%if(errors){%> <% errors.forEach(error=>{%>
+			<div class="alert alert-danger"><%= error.msg%></div>
+			<%})%> <%}%>
+		</div>
+
+		<!--Contact Modal-->
+		<div class="modal fade text-dark" id="loginModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">LocalLogin</h5>
+						<button class="close" data-dismiss="modal">
+							<span>&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form action="/user/login" method="POST">
+							<div class="form-group">
+								<label for="name"> UserName</label>
+								<input type="text" name="username" class="form-control" autofocus />
+							</div>
+							<div class="form-group">
+								<label for="password"> Password</label>
+								<input type="password" name="password" class="form-control" />
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-primary btn-block">Submit</button>
+							</div>
+						</form>
+					</div>
+				</div>
 			</div>
+		</div>
 
 		<script src="/index.js" type="text/javascript"></script>
 	</body>

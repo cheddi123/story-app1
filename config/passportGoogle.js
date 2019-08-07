@@ -16,6 +16,8 @@ module.exports = function(passport) {
 		});
 	});
 
+	// GOOGLE STRATEGY
+
 	passport.use(
 		new GoogleStrategy(
 			{
@@ -38,7 +40,6 @@ module.exports = function(passport) {
 				// check for existing user
 
 				User.findOne({ 'google.googleID': profile.id }).then(user => {
-					
 					if (user) {
 						done(null, user);
 					} else {
@@ -53,8 +54,8 @@ module.exports = function(passport) {
 	passport.use(
 		new LocalStrategy(function(username, password, done) {
 			// Match UserName
-			User.findOne({ "local.username": username.toLowerCase() }, function(err, user) {
-                // console.log("my hash passowrd : "+ user.local.password)
+			User.findOne({ 'local.username': username.toLowerCase() }, function(err, user) {
+				// console.log("my hash passowrd : "+ user.local.password)
 				if (err) {
 					return done(err);
 				}
@@ -78,4 +79,3 @@ module.exports = function(passport) {
 		})
 	);
 };
-

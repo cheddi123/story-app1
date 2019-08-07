@@ -20,7 +20,7 @@
 				<footer class="blockquote-footer">
 					Written by:
 					<cite title="Source Title"
-						><%= story.user.firstname %> on
+						><%= story.user.local.firstname || story.user.google.firstname  %> on
 						<span class="font-weight-bold"><%= moment(story.storyDate).format("ll") %></span>
 					</cite>
 				</footer>

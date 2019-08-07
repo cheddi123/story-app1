@@ -9,7 +9,9 @@ const UserModel = require('../models/UserModel');
 
 // GET Register form
 router.get('/register', (req, res) => {
+	  
 	res.render('user/register');
+    
 });
 
 // POST Register FORM
@@ -61,10 +63,11 @@ router.post(
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			// const firsterror = errors.array()
-			// console.log(req.body);
+			console.log(req.session.data)
 			req.flash('errors', errors.array());
-			return res.render('user/register', { errors: req.flash('errors'), newuser: req.body });
+			
+			
+			return res.render('user/register', { errors: req.flash('errors')});
 		} else {
 			const newUser = new UserModel({
 				local: {
