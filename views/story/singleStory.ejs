@@ -36,7 +36,7 @@
 						<div class="card-body table-dark">
 							<div class="blockquote-footer text-white py-2">
 								<span class="font-weight-bold">Post by <%=comment.username %> </span>
-								<cite> On <%= moment(comment.createdAt).format("lll").toString() %> </cite>
+								<cite> On <%= moment.utc(comment.createdAt).local().format("lll") %> </cite>
 
 								<%if(user){%> <% if(comment.id.equals(user.id)){%>
 								<form
