@@ -52,7 +52,7 @@
 		<title>Story Telling</title>
 	</head>
 	<body data-spy="scroll" data-target="#login">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="login">
 			<a class="navbar-brand " href="/">StoryTelling Home </a>
 			<% if(user){ %>
 			<a class="navbar-brand font-weight-bold" href="#"
@@ -75,7 +75,7 @@
 				<ul class="navbar-nav  ml-auto ">
 					<% if(!user ){%>
 
-					<li class="nav-item dropdown" id="login">
+					<li class="nav-item dropdown" >
 						<a
 							class="nav-link dropdown-toggle"
 							href="#"
