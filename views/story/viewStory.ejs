@@ -18,7 +18,7 @@
 				<a href="/stories/show/<%=story.id%>" class="btn btn-secondary showmore ">Read More</a>
 
 				<footer class="blockquote-footer">
-					Written by:
+					Posted by
 					<cite title="Source Title"
 						><%= story.user.local.firstname || story.user.google.firstname  %> on
 						<span class="font-weight-bold"><%= moment(story.storyDate).format("ll") %></span>

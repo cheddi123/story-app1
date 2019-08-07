@@ -7,7 +7,7 @@ $(document).ready(function() {
 		// check for hash value
 		if (this.hash !== '') {
 			// Prevent Default behaviour
-			// e.preventDefault();
+			e.preventDefault();
 			// Store hash
 			const hash = this.hash;
             //  console.log("click me")
