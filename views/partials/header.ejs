@@ -34,8 +34,8 @@
 		<link rel="stylesheet" href="/style.css" type="text/css" />
 
 		<script
-			src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+			src="https://code.jquery.com/jquery-3.4.0.min.js"
+			integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
 			crossorigin="anonymous"
 		></script>
 		<script
@@ -51,9 +51,9 @@
 
 		<title>Story Telling</title>
 	</head>
-	<body data-spy="scroll" data-target="#login">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-primary" id="login">
-			<a class="navbar-brand " href="/">StoryTelling Home </a>
+	<body data-spy="scroll" data-target="#main-nav">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary"  >
+			<a class="navbar-brand " id="login" href="/">StoryTelling Home </a>
 			<% if(user){ %>
 			<a class="navbar-brand font-weight-bold" href="#"
 				>Welcome <span class="text-capitalize"><%= (user.local.firstname) || (user.google.firstname) %></span>
@@ -157,6 +157,10 @@
 				</div>
 			</div>
 		</div>
+
+		
+
+
 
 		<script src="/index.js" type="text/javascript"></script>
 	</body>
