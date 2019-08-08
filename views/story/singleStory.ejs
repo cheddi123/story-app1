@@ -78,11 +78,12 @@
 				<div class="card-body">
 					<h5 class="card-link">
 						<a href="/stories/user/<%= story.user.id%>">
-							More Stories from <%= story.user.local.firstname || story.user.google.firstname %> <%=
-							story.user.local.lastname || story.user.google.lastname %> >></a
+							More Stories from <%= story.user.local.firstname || story.user.google.firstname  %> <%=
+							story.user.local.lastname || story.user.google.lastname %> </a
 						>
 					</h5>
 				</div>
+				<img  class="card-img-top rounded-circle" src="<%= story.user.google.photo %>" alt="profile picture">
 			</div>
 		</div>
 	</div>

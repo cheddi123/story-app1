@@ -21,6 +21,7 @@ router.get('/show/:id', (req, res) => {
 		.populate('user')
 		.populate('comments')
 		.then(story => {
+		
 			res.render('story/singleStory', { story });
 		})
 		.catch(err => {

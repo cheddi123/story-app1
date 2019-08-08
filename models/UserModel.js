@@ -35,6 +35,7 @@ const UserSchema = new mongoose.Schema({
 		firstname: { type: String },
 		lastname: { type: String },
 		email: { type: String  },
+		photo:{type:String,default:"/img/books.jpg"}
 
 		
 	},
@@ -48,6 +49,7 @@ const UserSchema = new mongoose.Schema({
 			minlength: [5, 'need at least 5 characters'],
 		},
 		password: { type: String },
+		
 	},
 	date: { type: Date, default: Date.now }
 });

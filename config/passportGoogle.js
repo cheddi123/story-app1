@@ -1,6 +1,5 @@
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const LocalUserModel = require('../models/LocalUserModel');
 const bcrypt = require('bcryptjs');
 const keys = require('./keys');
 const User = require('../models/UserModel');
@@ -27,14 +26,15 @@ module.exports = function(passport) {
 				proxy: true,
 			},
 			(accessToken, refreshToken, profile, done) => {
-				console.log(accessToken);
-				console.log(profile);
+				// console.log(accessToken);
+				console.log(profile.photos[0].value);
 				const newUser = {
 					google: {
 						googleID: profile.id,
 						firstname: profile.name.givenName,
 						lastname: profile.name.familyName,
 						email: profile.emails[0].value,
+						photo:profile.photos[0].value
 					},
 				};
 				// check for existing user
