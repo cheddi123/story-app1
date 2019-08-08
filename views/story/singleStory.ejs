@@ -36,7 +36,7 @@
 						<div class="card-body table-dark">
 							<div class="blockquote-footer text-white py-2">
 								<span class="font-weight-bold">Post by <%=comment.username %> </span>
-								<cite> On <%= moment.utc(comment.createdAt).local().format("lll") %> </cite>
+								<cite> On <%= momentTimeZone(comment.createdAt).tz("America/Chicago").format("lll") %> </cite>
 
 								<%if(user){%> <% if(comment.id.equals(user.id)){%>
 								<form
@@ -47,7 +47,7 @@
 										type="submit"
 										class="card-link btn btn-sm btn-danger float-right rounded-circle  "
 									>
-									<i class="far fa-trash-alt" style="font-size: 1.5rem"></i>
+									<i class="far fa-trash-alt" style="font-size: 1rem"></i>
 									</button>
 								</form>
 								<% }%> <% }%>

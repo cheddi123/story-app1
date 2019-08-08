@@ -4,6 +4,7 @@ const { ensureAuthenticated ,ensureGuest} = require('../validators/auth');
 const Story = require('../models/StoryModel');
 const Comment = require('../models/CommentModel');
 
+
 //GET public stories
 router.get('/', (req, res) => {
 	Story.find({ status: 'public' })
@@ -108,7 +109,7 @@ router.post('/comment/:id',ensureAuthenticated, (req, res) => {
 
 				// save the comment
 				newComment.save();
-				story.comments.unshift(newComment);
+				story.comments.push(newComment);
 				story.save();
 				res.redirect(`/stories/show/${story.id}`);
 			});

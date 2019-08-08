@@ -59,7 +59,8 @@ app.use(function(req, res, next) {
 	res.locals.messages = require('express-messages')(req, res);
 	res.locals.errors = req.flash('errors');
     res.locals.moment = require('moment');
-    res.locals.text_truncate = require("./helpers/ejshelper")
+	res.locals.text_truncate = require("./helpers/ejshelper");
+	res.locals.momentTimeZone = require("moment-timezone")
 
 	next();
 });
@@ -82,6 +83,7 @@ mongoose.connect(url, { useNewUrlParser: true }, err => {
 app.listen(PORT, (req, res) => {
 	console.log(`Server is listening on ${PORT}`);
 });
+
 
 
 
