@@ -136,7 +136,7 @@ router.post('/', ensureAuthenticated, (req, res) => {
 	});
 });
 
-// List Story from a User
+// List ALL PUBLCI Stories from a User
 router.get('/user/:user_id', (req, res) => {
 	Story.find({ user: req.params.user_id, status: 'public' })
 		.populate('user')
