@@ -3,15 +3,15 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { check, validationResult } = require('express-validator');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
+const keys = require("../config/keys")
 
 //Bring in LocalUser Model
 const UserModel = require('../models/UserModel');
 
 // GET Register form
 router.get('/register', (req, res) => {
-	  
 	res.render('user/register');
-    
 });
 
 // POST Register FORM
@@ -63,11 +63,10 @@ router.post(
 		// Finds the validation errors in this request and wraps them in an object with handy functions
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
-			console.log(req.session.data)
+			console.log(req.session.data);
 			req.flash('errors', errors.array());
-			
-			
-			return res.render('user/register', { errors: req.flash('errors')});
+
+			return res.render('user/register', { errors: req.flash('errors') });
 		} else {
 			const newUser = new UserModel({
 				local: {
@@ -125,4 +124,66 @@ router.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
+// GET email form
+router.get('/email', (req, res) => {
+	res.render('index/contact');
+});
+
+//POST Email
+router.post('/email', (req, res) => {
+	const output = `
+	<p> You have a new contact </p>
+	<h3> Contact details </h3>
+	<ul> 
+	<li> Name :${req.body.name} </li>
+	<li> Company :${req.body.company} </li>
+	<li>Phone Email :${req.body.email} </li>
+	<li>Phone Number :${req.body.phoneNumber} </li>
+	<li> Message:${req.body.message} </li>
+	</ul>
+	<h4> Message : ${req.body.message}
+	`;
+	// create reusable transporter object using the default SMTP transport
+	let transporter = nodemailer.createTransport({
+		host: 'smtp.gmail.com',
+
+		port: 465,
+		secure: true, // true for 465, false for other ports
+		auth: {
+			user: keys.userEmail,
+			// generated ethereal user
+			pass:  keys.userPassword,
+			// generated ethereal password
+		},
+		
+	});
+
+	// send mail with defined transport object
+	let info = {
+		from: ' "Ched Tech" <cheddi.tech@gmail.com>', // sender address
+		to: 'cheddi.charles@gmail.com', // list of receivers
+		subject: 'Hello ✔', // Subject line
+		text: 'Hello world?', // plain text body
+		html: output, // html body
+	};
+
+	transporter.sendMail(info, (err, data) => {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('Message sent: %s', data.messageId);
+			// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+			// Preview only available when sending through an Ethereal account
+			console.log('Preview URL: %s', nodemailer.getTestMessageUrl(data));
+			// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+			res.render('index/contact');
+		}
+	});
+});
+
 module.exports = router;
+
+
+
+

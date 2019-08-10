@@ -6,28 +6,30 @@ const app = express();
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
-const userRoutes = require("./routes/userRoutes")
-const storyRoutes = require("./routes/storyRoutes")
-const indexRoutes = require("./routes/indexRoutes")
-const methodOverride = require('method-override')
-const authRoutes = require("./routes/auth")
+const userRoutes = require('./routes/userRoutes');
+const storyRoutes = require('./routes/storyRoutes');
+const indexRoutes = require('./routes/indexRoutes');
+const methodOverride = require('method-override');
+const authRoutes = require('./routes/auth');
 const keys = require('./config/keys');
 
 // HELPERS
-const {stripTags} = require("./helpers/ejshelper")
+const { stripTags } = require('./helpers/ejshelper');
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // override with POST having ?_method=DELETE
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
 
 // Use a static folder and include middleware
 app.use(express.static('public'));
 // initializing ejs
-app.set('view engine',
-   
- 'ejs');
+app.set(
+	'view engine',
+
+	'ejs'
+);
 
 //EXPRESS SESSION MIDDLEWARE  be sure to use session() before passport.session() to ensure that the login session is restored in the correct order.
 app.use(
@@ -41,10 +43,8 @@ app.use(
 // EXPRESS MESSAGES MIDDLEWARE
 app.use(flash());
 
-
-
 // Passport Config
-require("./config/passportGoogle")(passport)
+require('./config/passportGoogle')(passport);
 
 // Passport Config Put this before routes
 // require('./config/passport')(passport);
@@ -58,18 +58,18 @@ app.use(function(req, res, next) {
 	res.locals.user = req.user || null;
 	res.locals.messages = require('express-messages')(req, res);
 	res.locals.errors = req.flash('errors');
-    res.locals.moment = require('moment');
-	res.locals.text_truncate = require("./helpers/ejshelper");
-	res.locals.momentTimeZone = require("moment-timezone")
+	res.locals.moment = require('moment');
+	res.locals.text_truncate = require('./helpers/ejshelper');
+	res.locals.momentTimeZone = require('moment-timezone');
 
 	next();
 });
 
 // ROUTES MIDDLEWARE
-app.use("/user",userRoutes)
-app.use("/stories",storyRoutes)
-app.use("/",indexRoutes)
-app.use("/auth",authRoutes)
+app.use('/user', userRoutes);
+app.use('/stories', storyRoutes);
+app.use('/', indexRoutes);
+app.use('/auth', authRoutes);
 
 mongoose.set('useCreateIndex', true);
 const url = keys.mongoURL || 'mongodb://localhost/Storytell_Db';
@@ -83,8 +83,3 @@ mongoose.connect(url, { useNewUrlParser: true }, err => {
 app.listen(PORT, (req, res) => {
 	console.log(`Server is listening on ${PORT}`);
 });
-
-
-
-
-
