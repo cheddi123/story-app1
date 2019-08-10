@@ -160,7 +160,7 @@ router.post('/email', (req, res) => {
 
 	// send mail with defined transport object
 	let info = {
-		from: ' "Ched Tech" <cheddi.tech@gmail.com>', // sender address
+		from: ' "Cheddi WEB DEV "<cheddi.tech@gmail.com>', // sender address
 		to: 'cheddi.charles@gmail.com', // list of receivers
 		subject: 'Hello ✔', // Subject line
 		text: 'Hello world?', // plain text body
@@ -177,12 +177,15 @@ router.post('/email', (req, res) => {
 			// Preview only available when sending through an Ethereal account
 			console.log('Preview URL: %s', nodemailer.getTestMessageUrl(data));
 			// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-			res.render('index/contact');
+			req.flash("success","Email sent")
+			res.redirect('/');
 		}
 	});
 });
 
 module.exports = router;
+
+
 
 
 
